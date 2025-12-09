@@ -1,7 +1,5 @@
 package com.simulation.domaine.medicament;
 
-import java.util.Objects;
-
 //état de la concentration D_{m,t} pour un patient
 public class Concentration {
     private  Medicament medicament;   //référence au médicament

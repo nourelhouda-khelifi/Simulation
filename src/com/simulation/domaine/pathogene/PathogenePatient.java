@@ -25,10 +25,8 @@ public class PathogenePatient {
     
     
     public void evoluerCycle(int cycle, double immunite, Map<Medicament, Double> conc) {
-        double chargeCalculee = pathogene.calculerCharge(immunite, conc);
-        
-        this.L = chargeCalculee;
-        
+        pathogene.evoluerCycle(cycle, immunite, conc);
+        this.L = pathogene.getCharge();
         historique.add(new StateSnapshot(cycle, L, new HashMap<>(pathogene.getResistances()), new HashMap<>(conc)));
     }
     

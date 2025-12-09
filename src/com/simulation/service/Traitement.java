@@ -4,7 +4,6 @@ import com.simulation.domaine.medicament.Medicament;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /*pour chaque cycle (clé = numéro du cycle), on stocke un map Medicament → dose.*/
 public class Traitement {

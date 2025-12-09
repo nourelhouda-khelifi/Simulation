@@ -6,7 +6,6 @@ import com.simulation.domaine.patient.Patient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Simulation {
 
@@ -35,12 +34,13 @@ public class Simulation {
 
     //applique ces doses sur tous les patients, et chaque patient fait évoluer ses pathogènes et son immunité
     public void run() {
-
         
         // Boucle sur tous les cycles
         for (int c = 0; c < nbCycles; c++) {
-            // Récupérer les doses pour ce cycle (maintenant avec Medicament)
+            System.out.println("CYCLE " + c);
+            // Récupérer les doses pour ce cycle
             Map<Medicament, Double> doses = traitement.getDosesPourCycle(c);
+            System.out.println("Doses pour ce cycle: " + doses);
             Cycle cycle = new Cycle(c, doses);
             cycles.add(cycle);
             // Faire évoluer chaque patient pour ce cycle

@@ -2,7 +2,6 @@ package com.simulation.domaine.pathogene;
 
 import com.simulation.comportement.IComportementCharge;
 import com.simulation.domaine.medicament.Medicament;
-import com.simulation.snapshot.StateSnapshot;
 
 import java.util.*;
 
@@ -22,8 +21,6 @@ public abstract class Pathogene implements IComportementCharge {
 
     protected boolean IsQ;
 
-    protected final List<StateSnapshot> historique = new ArrayList<>();
-
     public Pathogene(double L0, double tauC, double alphaI, boolean isQ) {
         if (L0 < 0) throw new IllegalArgumentException("L0 (charge initiale) ne peut pas être négatif " );
         if (tauC < 0) throw new IllegalArgumentException("TauC  ne peut pas être négatif " + tauC);
@@ -37,8 +34,6 @@ public abstract class Pathogene implements IComportementCharge {
 
 
     public void setAlphaPourMedicament(Medicament medicament, double alphaM) {
-        if (medicament == null) throw new IllegalArgumentException("Le médicament ne peut pas être null");
-        if (alphaM < 0) throw new IllegalArgumentException("Alpha (sensibilité au médicament) ne peut pas être négatif, reçu : " + alphaM);
         alphaParMedicament.put(medicament, alphaM);
     }
     public double getAlphaPourMedicament(Medicament medicament) {
@@ -46,8 +41,6 @@ public abstract class Pathogene implements IComportementCharge {
     }
 
     public void setDeltaPourMedicament(Medicament medicament, double delta) {
-        if (medicament == null) throw new IllegalArgumentException("Le médicament ne peut pas être null");
-        if (delta < 0) throw new IllegalArgumentException("Delta (résistance) ne peut pas être négatif, reçu : " + delta);
         deltaParMedicament.put(medicament, delta);
     }
     public double getDeltaPourMedicament(Medicament medicament) {
@@ -55,8 +48,6 @@ public abstract class Pathogene implements IComportementCharge {
     }
 
     public void setResistancePourMedicament(Medicament medicament, double r) {
-        Objects.requireNonNull(medicament, "Le médicament ne peut pas être null");
-        if (r < 0 || r > 1.0) throw new IllegalArgumentException("Résistance doit être entre 0 et 1, " );
         resistanceParMedicament.put(medicament, r);
     }
     public double getResistancePourMedicament(Medicament medicament) {
@@ -99,10 +90,6 @@ public abstract class Pathogene implements IComportementCharge {
         if (this instanceof com.simulation.comportement.IResistant resistant) {
             resistant.mettreAJourResistance(conc);
         }
-
-        // enregistrement historique
-        historique.add(
-                new StateSnapshot(cycle, L, new HashMap<>(resistanceParMedicament), new HashMap<>(conc)));
     }
 
     public abstract double calculerCharge(double immunite, Map<Medicament, Double> conc);
@@ -113,8 +100,6 @@ public abstract class Pathogene implements IComportementCharge {
 
 
 
-    public List<StateSnapshot> getHistorique() {
-        return Collections.unmodifiableList(historique);
-    }
+
 }
 
