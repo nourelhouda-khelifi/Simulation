@@ -48,11 +48,13 @@ public class Main {
     private static void afficherResultats(PatientAdulte patient) {
         System.out.println("Patient: " + patient.getId());
         System.out.println("\nHistorique du patient (Immunité et Concentrations):");
-        System.out.println(String.format("%-8s %-15s", "Cycle", "Immunité"));
-        System.out.println("-".repeat(23));
+        System.out.println(String.format("%-8s %-15s %-20s", "Cycle", "Immunité", "Concentrations"));
+        System.out.println("-".repeat(65));
         
         for (var snapshot : patient.getHistorique()) {
-            System.out.println(String.format("%-8d %-15.4f", snapshot.getCycle(), snapshot.getImmunite()));
+            String conc = snapshot.getConcentrations().isEmpty() ? "N/A" : 
+                String.format("%.4f", snapshot.getConcentrations().values().stream().findFirst().orElse(0.0));
+            System.out.println(String.format("%-8d %-15.4f %-20s", snapshot.getCycle(), snapshot.getImmunite(), conc));
         }
         
         System.out.println("\n\nHistorique des pathogènes (Charge et Résistances):");

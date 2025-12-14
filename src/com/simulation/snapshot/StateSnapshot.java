@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 public class StateSnapshot {
 
-    private final int cycle;
-    private final double charge;
-    private final Map<Medicament, Double> resistances;
-    private final Map<Medicament, Double> concentrations;
+    private  int cycle;
+    private  double charge;
+    private  Map<Medicament, Double> resistances;
+    private  Map<Medicament, Double> concentrations;
 
     public StateSnapshot(int cycle, double charge, Map<Medicament, Double> resistances, Map<Medicament, Double> concentrations) {
         this.cycle = cycle;

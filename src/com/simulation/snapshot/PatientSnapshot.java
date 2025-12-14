@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 public class PatientSnapshot {
-    private final int cycle;
-    private final double immunite;
-    private final Map<Medicament, Double> concentrations;
+    private  int cycle;
+    private  double immunite;
+    private  Map<Medicament, Double> concentrations;
 
     public PatientSnapshot(int cycle, double immunite, Map<Medicament, Double> concentrations) {
         this.cycle = cycle;

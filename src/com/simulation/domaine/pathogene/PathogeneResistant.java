@@ -26,7 +26,6 @@ public class PathogeneResistant extends Pathogene implements IResistant {
         }
     }
 
-    // Formule classique (1)
     protected double calculerChargeClassique(double L, double immunite, Map<Medicament, Double> conc) {
         double croissance = tauC * L;
         double effetImm = alphaI * immunite;

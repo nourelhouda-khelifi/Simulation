@@ -1,14 +1,21 @@
 package com.simulation.domaine.medicament;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Medicament {
+    private   List<String> existingIds = new ArrayList<>();
     private  String id;
     private final double h;
 
     public Medicament(String id, double h) {
+        if (existingIds.contains(id)) {
+            throw new IllegalArgumentException("Un médicament avec l'ID '" + id + "' existe déjà");
+        }
         this.id = id;
         this.h = h;
+        existingIds.add(id);
     }
 
     public String getId() {
