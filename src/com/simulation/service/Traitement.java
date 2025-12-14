@@ -5,18 +5,21 @@ import com.simulation.domaine.medicament.Medicament;
 import java.util.HashMap;
 import java.util.Map;
 
-/*pour chaque cycle (clé = numéro du cycle), on stocke un map Medicament → dose.*/
 public class Traitement {
 
-    // cycle -> (Medicament -> dose)
-    private final Map<Integer, Map<Medicament, Double>> plan = new HashMap<>();
+    private final Map<Integer, Cycle> cycles = new HashMap<>();
 
-    public void fixerDose(int cycle, Medicament medicament, double dose) {
-
-        plan.computeIfAbsent(cycle, c -> new HashMap<>()).put(medicament, dose);
+    public void fixerDose(int numero, Medicament medicament, double dose) {
+        Cycle cycle = cycles.computeIfAbsent(numero, n -> new Cycle(n, new HashMap<>()));
+        cycle.getDoses().put(medicament, dose);
     }
 
-    public Map<Medicament, Double> getDosesPourCycle(int cycle) {
-        return plan.getOrDefault(cycle, new HashMap<>());
+    public Map<Medicament, Double> getDosesPourCycle(int numero) {
+        Cycle cycle = cycles.get(numero);
+        return cycle != null ? cycle.getDoses() : new HashMap<>();
+    }
+
+    public Cycle getCycle(int numero) {
+        return cycles.get(numero);
     }
 }

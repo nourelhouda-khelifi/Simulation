@@ -7,9 +7,6 @@ public class Medicament {
     private final double h;
 
     public Medicament(String id, double h) {
-        if (id == null) throw new NullPointerException("L'ID du médicament ne peut pas être null");
-        if (id.trim().isEmpty()) throw new IllegalArgumentException("L'ID du médicament ne peut pas être vide");
-        if (h < 0 || h > 1.0) throw new IllegalArgumentException("H  doit être entre 0 et 1" );
         this.id = id;
         this.h = h;
     }

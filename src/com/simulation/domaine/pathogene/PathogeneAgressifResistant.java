@@ -7,12 +7,12 @@ import com.simulation.domaine.medicament.Medicament;
 import java.util.Map;
 
 public class PathogeneAgressifResistant extends Pathogene implements IAgressif, IResistant {
-    public PathogeneAgressifResistant(double L0, double tauC, double alphaI, boolean isQ) {
-        super(L0, tauC, alphaI, isQ);
+    public PathogeneAgressifResistant(double tauC, double alphaI, boolean isQ) {
+        super(tauC, alphaI, isQ);
     }
 
     @Override
-    public double calculerCharge(double immunite, Map<Medicament, Double> conc) {
+    public double calculerCharge(double L, double immunite, Map<Medicament, Double> conc) {
         return calculerChargeAgressive(L, tauC, immunite, calculEffetMedicaments(conc));
     }
 
@@ -30,7 +30,7 @@ public class PathogeneAgressifResistant extends Pathogene implements IAgressif, 
             Medicament med = e.getKey();
             double delta = getDeltaPourMedicament(med);
             double oldR = getResistancePourMedicament(med);
-            double newR = Math.min(1.0, oldR + delta * e.getValue());  // ← Cap à 1.0
+            double newR =  oldR + delta * e.getValue();  
             setResistancePourMedicament(med, newR);
         }
     }

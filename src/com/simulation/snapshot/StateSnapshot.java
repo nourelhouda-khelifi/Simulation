@@ -5,7 +5,6 @@ import com.simulation.domaine.medicament.Medicament;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-//garder un état d’un pathogène à un moment donné (cycle t)
 public class StateSnapshot {
 
     private final int cycle;

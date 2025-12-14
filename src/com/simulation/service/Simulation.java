@@ -32,10 +32,9 @@ public class Simulation {
         return patients;
     }
 
-    //applique ces doses sur tous les patients, et chaque patient fait évoluer ses pathogènes et son immunité
     public void run() {
         
-        // Boucle sur tous les cycles
+        // Boucle cycles
         for (int c = 0; c < nbCycles; c++) {
             System.out.println("CYCLE " + c);
             // Récupérer les doses pour ce cycle

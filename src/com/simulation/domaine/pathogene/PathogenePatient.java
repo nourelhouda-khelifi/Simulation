@@ -4,35 +4,36 @@ import com.simulation.domaine.medicament.Medicament;
 import com.simulation.snapshot.StateSnapshot;
 
 import java.util.*;
-
-/**
-  associe un pathogène partagé à sa charge L SPÉCIFIQUE pour UN PATIENT.
- * 
- * Le pathogène lui-même (paramètres tauC, alphaI, resistances) est PARTAGÉ entre patients.
- * Seule la charge L change par patient.
- * L'historique est aussi local au patient.
- */
 public class PathogenePatient {
     
-    private final Pathogene pathogene;          
+    private  Pathogene pathogene;          
     private double L;                           
     private final List<StateSnapshot> historique = new ArrayList<>(); 
     
     public PathogenePatient(Pathogene pathogene) {
         this.pathogene = pathogene;
-        this.L = pathogene.getCharge();  // Initialiser avec la charge du pathogène
+        this.L = 0;  
+    }
+    public PathogenePatient(Pathogene pathogene , double L0) {
+        this.pathogene = pathogene;
+        this.L = 0;  
     }
     
     
     public void evoluerCycle(int cycle, double immunite, Map<Medicament, Double> conc) {
-        pathogene.evoluerCycle(cycle, immunite, conc);
-        this.L = pathogene.getCharge();
+        this.L = pathogene.calculerCharge(L, immunite, conc);
+        if (pathogene instanceof com.simulation.comportement.IResistant resistant) {
+            resistant.mettreAJourResistance(conc);
+        }
         historique.add(new StateSnapshot(cycle, L, new HashMap<>(pathogene.getResistances()), new HashMap<>(conc)));
     }
     
-    // GETTERS
     public double getCharge() {
         return L;
+    }
+
+    public void setCharge(double L) {
+        this.L = L;
     }
     
     public List<StateSnapshot> getHistorique() {

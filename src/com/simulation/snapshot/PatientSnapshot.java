@@ -5,7 +5,6 @@ import com.simulation.domaine.medicament.Medicament;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-//garder un état du patient à un moment donné (cycle t)
 public class PatientSnapshot {
     private final int cycle;
     private final double immunite;
